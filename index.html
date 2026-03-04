@@ -1,14 +1,47 @@
 
 <!DOCTYPE html>
 <html>
+  
   <head>
     <meta charset="utf-8">
     <title>Change Calculator</title>
+      <link rel="stylesheet" href="style.css">
+
   </head>
   <body>
     <!-- Write your markup here -->
-
+      <div class="container">
+        <div class="content-wrapper">
+          <div class="header">
+            <h1 class="title">Change Calculator</h1>
+            <p class="subtitle">Calculate exact change for transactions</p>
+          </div>
+          <div class="calculator">
+            <div class="input-section">
+              <label for="amount-due">Sale Amount:</label>
+              <input type="number" id="amount-due" placeholder="Enter amount due">
+            </div>
+            <div class="input-section">
+              <label for="amount-received">Cash Tendered:</label>
+              <input type="number" id="amount-received" placeholder="Enter amount received">
+            </div>
+            <div class="input-section">
+            <button id="calculate-change" >Calculate Change</button>
+            <button id="reset-calculator">Reset</button>
+            </div>
+        </div>
+        <div class="output">
+          <h2>Change Due:</h2>
+          <p id="change-result">--</p>
+          <div id="input-section">
+            <h3>Denominations:</h3>
+            <ul id="denominations-list">
+              <!-- Change breakdown will be displayed here -->
+            </ul>
+          </div>
+        </div>
+      </div>
     <!-- Don't forget to add your <script> tag here -->
-
+      <script src="main.js"></script>
   </body>
 </html>
