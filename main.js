@@ -64,6 +64,7 @@ function handleResetButtonClick() {
     document.getElementById('amount-due').value = '';
     document.getElementById('amount-received').value = '';
     document.getElementById('change-result').textContent = '--';
+    document.getElementById('denominations-list').innerHTML = '';
 }
 
 document.getElementById('reset-calculator').onclick = handleResetButtonClick;
