@@ -38,11 +38,11 @@ function handleCalculateButtonClick() {
     const nickels = Math.floor(changeCents / 5); changeCents -= nickels * 5;
     const pennies = changeCents;
 
-    document.getElementById('dollars-output').textContent = String(dollars);
-    document.getElementById('quarters-output').textContent = String(quarters);
-    document.getElementById('dimes-output').textContent = String(dimes);
-    document.getElementById('nickels-output').textContent = String(nickels);
-    document.getElementById('pennies-output').textContent = String(pennies);
+    document.getElementById('dollars-output').textContent = `Dollars: ${dollars}`;
+    document.getElementById('quarters-output').textContent = `Quarters: ${quarters}`;
+    document.getElementById('dimes-output').textContent = `Dimes: ${dimes}`;
+    document.getElementById('nickels-output').textContent = `Nickels: ${nickels}`;
+    document.getElementById('pennies-output').textContent = `Pennies: ${pennies}`;
 
     let outputElement = document.getElementById('change-result');
     outputElement.textContent = `Change: $${(amountReceived - amountDue).toFixed(2)}`;
