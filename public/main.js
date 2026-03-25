@@ -11,7 +11,9 @@
         { name: 'Nickels', value: 0.05 },
         { name: 'Pennies', value: 0.01 }
     ];
-function calculateChange() {
+
+
+function handleCalculateButtonClick() {
     // Get the input values
     const amountDue = parseFloat(document.getElementById('amount-due').value);
     const amountReceived = parseFloat(document.getElementById('amount-received').value);
@@ -27,44 +29,32 @@ function calculateChange() {
         return;
     }
     
-    // Calculate change
-    let change = amountReceived - amountDue;
-    
-    // Define denominations    
+    // Calculate change using integer math to avoid floating point errors
+    let changeCents = Math.round((amountReceived - amountDue) * 100);
 
-    
-    // Calculate the number of each denomination
-    const changeBreakdown = {};
-    
-    for (const denomination of denominations) {
-        changeBreakdown[denomination.name] = Math.floor(change / denomination.value);
-        change -= changeBreakdown[denomination.name] * denomination.value;
-    }
-    
-    // Display the result
-    let result = `Change: $${(amountReceived - amountDue).toFixed(2)}\n\n`;
-    let denominationsList = document.getElementById('denominations-list');
-    denominationsList.innerHTML = ''; // Clear previous results
-    for (const denomination of denominations) {
-        if (changeBreakdown[denomination.name] > 0) {
-            //result += `${denomination.name}: ${changeBreakdown[denomination.name]}\n`;
-            denominationsList.appendChild(document.createElement('p')).textContent = `${denomination.name} --- ${changeBreakdown[denomination.name]}`;
-        }
-    }
+    const dollars = Math.floor(changeCents / 100); changeCents -= dollars * 100;
+    const quarters = Math.floor(changeCents / 25); changeCents -= quarters * 25;
+    const dimes = Math.floor(changeCents / 10); changeCents -= dimes * 10;
+    const nickels = Math.floor(changeCents / 5); changeCents -= nickels * 5;
+    const pennies = changeCents;
+
+    document.getElementById('dollars-output').textContent = String(dollars);
+    document.getElementById('quarters-output').textContent = String(quarters);
+    document.getElementById('dimes-output').textContent = String(dimes);
+    document.getElementById('nickels-output').textContent = String(nickels);
+    document.getElementById('pennies-output').textContent = String(pennies);
+
     let outputElement = document.getElementById('change-result');
-    outputElement.textContent = result;
-
-}
-
-function handleCalculateButtonClick() {
-    calculateChange();
+    outputElement.textContent = `Change: $${(amountReceived - amountDue).toFixed(2)}`;
 }
 
 function handleResetButtonClick() {
     document.getElementById('amount-due').value = '';
     document.getElementById('amount-received').value = '';
     document.getElementById('change-result').textContent = '--';
-    document.getElementById('denominations-list').innerHTML = '';
+    ['dollars-output', 'quarters-output', 'dimes-output', 'nickels-output', 'pennies-output'].forEach(id => {
+        document.getElementById(id).textContent = '';
+    });
 }
 
 document.getElementById('reset-calculator').onclick = handleResetButtonClick;
